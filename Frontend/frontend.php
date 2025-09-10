@@ -270,8 +270,8 @@
             </div>
         </div>
         <div class="d-flex gap-2 mx-2">
-            <a href="login.html"><button class="btn btn-primary" >Login</button></a>
-            <a href="register.html"><button class="btn btn-primary" >Register</button></a>
+            <a href="../Auth/login.php"><button class="btn btn-primary" >Login</button></a>
+            <a href="../Auth/register.php"><button class="btn btn-primary" >Register</button></a>
         </div>
     </nav>
 
@@ -541,7 +541,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
                 <p>&copy; 2024 ShopHub. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>

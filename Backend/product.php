@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
-  <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="./assets/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
 
 <body>
@@ -32,8 +32,8 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="assets/images/logos/logo.svg" alt="" />
+          <a href="./dashboard.php" class="text-nowrap logo-img">
+            <img src="../assets/images/logos/logo.svg" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-6"></i>
@@ -47,7 +47,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="./index.php" aria-expanded="false">
                 <i class="ti ti-atom"></i>
                 <span class="hide-menu">Dashboard</span>
               </a>
@@ -56,23 +56,23 @@
             <!-- Dashboard -->
             <!-- ---------------------------------- -->
             <li class="sidebar-item">
-              <a class="sidebar-link justify-content-between" href="#" aria-expanded="false">
+              <a class="sidebar-link justify-content-between" href="product.php" aria-expanded="false">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
                     <i class="ti ti-aperture"></i>
                   </span>
-                  <span class="hide-menu">Add Course</span>
+                  <span class="hide-menu">Products</span>
                 </div>
 
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link justify-content-between" href="#" aria-expanded="false">
+              <a class="sidebar-link justify-content-between" href="user.php" aria-expanded="false">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
                     <i class="ti ti-shopping-cart"></i>
                   </span>
-                  <span class="hide-menu">eCommerce</span>
+                  <span class="hide-menu">Users</span>
                 </div>
 
               </a>
@@ -105,12 +105,12 @@
               <li class="nav-item dropdown">
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="./assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
                     
-                    <a href="./login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="./login.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
@@ -147,7 +147,7 @@
                         <tr>
                           <td class="px-0">
                             <div class="d-flex align-items-center">
-                              <img src="./assets/images/profile/user-3.jpg" class="rounded-circle" width="40"
+                              <img src="../assets/images/profile/user-3.jpg" class="rounded-circle" width="40"
                                 alt="flexy" />
                               <div class="ms-3">
                                 <h6 class="mb-0 fw-bolder">Sunil Joshi</h6>
@@ -166,7 +166,7 @@
                         <tr>
                           <td class="px-0">
                             <div class="d-flex align-items-center">
-                              <img src="./assets/images/profile/user-5.jpg" class="rounded-circle" width="40"
+                              <img src="../assets/images/profile/user-5.jpg" class="rounded-circle" width="40"
                                 alt="flexy" />
                               <div class="ms-3">
                                 <h6 class="mb-0 fw-bolder">
@@ -187,7 +187,7 @@
                         <tr>
                           <td class="px-0">
                             <div class="d-flex align-items-center">
-                              <img src="./assets/images/profile/user-6.jpg" class="rounded-circle" width="40"
+                              <img src="../assets/images/profile/user-6.jpg" class="rounded-circle" width="40"
                                 alt="flexy" />
                               <div class="ms-3">
                                 <h6 class="mb-0 fw-bolder">
@@ -208,7 +208,7 @@
                         <tr>
                           <td class="px-0">
                             <div class="d-flex align-items-center">
-                              <img src="./assets/images/profile/user-7.jpg" class="rounded-circle" width="40"
+                              <img src="../assets/images/profile/user-7.jpg" class="rounded-circle" width="40"
                                 alt="flexy" />
                               <div class="ms-3">
                                 <h6 class="mb-0 fw-bolder">Nirav Joshi</h6>
@@ -227,7 +227,7 @@
                         <tr>
                           <td class="px-0">
                             <div class="d-flex align-items-center">
-                              <img src="./assets/images/profile/user-8.jpg" class="rounded-circle" width="40"
+                              <img src="../assets/images/profile/user-8.jpg" class="rounded-circle" width="40"
                                 alt="flexy" />
                               <div class="ms-3">
                                 <h6 class="mb-0 fw-bolder">Micheal Doe</h6>
@@ -254,13 +254,13 @@
       </div>
     </div>
   </div>
-  <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./assets/js/sidebarmenu.js"></script>
-  <script src="./assets/js/app.min.js"></script>
-  <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
-  <script src="./assets/js/dashboard.js"></script>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
