@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flexy Free Bootstrap Admin Template by WrapPixel</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
 <body>
@@ -22,20 +23,25 @@
                   <img src="../assets/images/logos/logo.svg" alt="">
                 </a>
                 <p class="text-center">Your Social Campaigns</p>
-                <form>
+                <form action="insert.php" method="post" enctype="multipart/form-data">
                   <div class="mb-3">
                     <label for="exampleInputtext1" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
+                    <input type="text" class="form-control" name="username" id="exampleInputtext1" aria-describedby="textHelp">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
                   </div>
-                  <a href="./index.php" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</a>
+                  <div class="mb-4">
+                    <label for="file" class="form-label">Profile</label> <br>
+                    <img id="image" src="https://i.pinimg.com/1200x/cd/4b/d9/cd4bd9b0ea2807611ba3a67c331bff0b.jpg" width="70px" height="70px" class="rounded-circle" alt="">
+                    <input type="file" class="form-control" name="file" id="file">
+                  </div>
+                  <button class="btn btn-primary w-100 mb-2" type="submit" name="register"  >Sign up</button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
                     <a class="text-primary fw-bold ms-2" href="./login.php">Sign In</a>
@@ -54,4 +60,19 @@
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 </html>
+<script>
+  $(document).ready(function(){
+    $('#file').hide();
+    $('#image').click(function(){
+      $('#file').click();
+    })
+    $('#file').change(function(){
+      const file=this.files[0];
+      if(file){
+        const  img=URL.createObjectURL(file);
+        $('#image').attr('src',img)
+      }
+    })
+  })
+</script>
 
