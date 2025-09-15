@@ -18,5 +18,4 @@ if(isset($_POST['register'])){
         alert('Register unsuccessfully!','Try again!','error','register.php');
     }
 }
-
 ?>

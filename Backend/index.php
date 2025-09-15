@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['login']) || $_SESSION['login']!=1){
+    header('location: ../Frontend/frontend.php');
+   
+  }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -103,12 +111,15 @@
               <li class="nav-item dropdown">
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <?php
+                    
+                    echo '<img src="../Auth/image/'.$_SESSION['profile'].'" alt="" width="35" height="35" class="rounded-circle">';
+                  ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
                     
-                    <a href="../Frontend/frontend.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="../Auth/logout.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
