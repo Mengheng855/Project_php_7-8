@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -18,7 +21,7 @@
     <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
         <a class="d-flex justify-content-center" href="#">
-          <img src="assets/images/logos/logo-wrappixel.svg" alt="" width="150">
+          <img src="../assets/images/logos/logo-wrappixel.svg" alt="" width="150">
         </a>
 
 
@@ -105,11 +108,13 @@
               <li class="nav-item dropdown">
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <?php
+                  echo '<img src="../Auth/image/' . $_SESSION['profile'] . '" alt="" width="35" height="35" class="rounded-circle">';
+                  ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    
+
                     <a href="./login.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
@@ -129,121 +134,98 @@
 
                   <div class="table-responsive mt-4">
                     <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
+                      <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        +Add Product
+                      </button>
                       <thead>
                         <tr>
-                          <th scope="col" class="px-0 text-muted">
-                            Assigned
+                          <th>
+                            ID
                           </th>
-                          <th scope="col" class="px-0 text-muted">Name</th>
-                          <th scope="col" class="px-0 text-muted">
-                            Priority
+                          <th>Title</th>
+                          <th>
+                            Price
                           </th>
-                          <th scope="col" class="px-0 text-muted text-end">
-                            Budget
+                          <th>
+                            Description
+                          </th>
+                          <th>
+                            Image
+                          </th>
+                          <th>
+                            Action
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-3.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Sunil Joshi</h6>
-                                <span class="text-muted">Web Designer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Elite Admin</td>
-                          <td class="px-0">
-                            <span class="badge bg-info">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $3.9K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-5.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">
-                                  Andrew McDownland
-                                </h6>
-                                <span class="text-muted">Project Manager</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Real Homes WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge text-bg-primary">Medium</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $24.5K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-6.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">
-                                  Christopher Jamil
-                                </h6>
-                                <span class="text-muted">SEO Manager</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">MedicalPro WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge bg-warning">Hight</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $12.8K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-7.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Nirav Joshi</h6>
-                                <span class="text-muted">Frontend Engineer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Hosting Press HTML</td>
-                          <td class="px-0">
-                            <span class="badge bg-danger">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $2.4K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-8.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Micheal Doe</h6>
-                                <span class="text-muted">Content Writer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Helping Hands WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge bg-success">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $9.3K
+                          <td>001</td>
+                          <td>T-shirt</td>
+                          <td>$12.5</td>
+                          <td>New popular T-shirt</td>
+                          <td><img width="70px" height="70px" class="rounded-circle" src="https://i.pinimg.com/1200x/05/a6/39/05a639f55ec0188d3b4f83ceb52c98ec.jpg" alt=""></td>
+                          <td>
+                            <button class="btn btn-danger" type="button">Delete</button>
+                            <button class="btn btn-warning" type="button">Edit</button>
                           </td>
                         </tr>
                       </tbody>
+                      <!-- Button trigger modal -->
+
+
+                      <!-- Modal -->
+                      <<!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                              <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+                              <form action="" id="form" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                  <div class="row g-3">
+
+                                    <!-- Title -->
+                                    <div class="col-md-6">
+                                      <label for="title" class="form-label">Product Title</label>
+                                      <input type="text" name="title" id="title" class="form-control" placeholder="Enter product title" required>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="col-md-6">
+                                      <label for="price" class="form-label">Price ($)</label>
+                                      <input type="number" name="price" id="price" class="form-control" step="0.01" placeholder="Enter price" required>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="col-12">
+                                      <label for="description" class="form-label">Description</label>
+                                      <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter product description" required></textarea>
+                                    </div>
+
+                                    <!-- Image -->
+                                    <div class="col-12">
+                                      <label for="image" class="form-label">Product Image</label> <br>
+                                      <img width="70px" id="image" height="70px" class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s" alt="">
+                                      <input type="file" name="file" id="file" class="form-control"  required>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" id="save" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                                </div>
+                              </form>
+
+                            </div>
+                          </div>
+                        </div>
+
                     </table>
                   </div>
                 </div>
@@ -264,5 +246,43 @@
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
-
 </html>
+<script>
+  $(document).ready(function(){
+    $('#file').hide();
+    $('#image').click(function(){
+      $('#file').click();
+    })
+    $('#file').change(function(){
+      const file=this.files[0];
+      if(file){
+        const img=URL.createObjectURL(file);
+        $('#image').attr('src',img);
+      }
+    })
+    $('#save').click(function(){
+     
+      let file=$('#file')[0].files[0];
+      let title=$('#title').val();
+      let price=$('#price').val();
+      let des=$('#description').val();
+
+      const formdata=new FormData();
+      formdata.append('file',file);
+      formdata.append('title',title);
+      formdata.append('price',price);
+      formdata.append('description',des);
+      $.ajax({
+        url:'insert.php',
+        method:'POST',
+        data:formdata,
+        contentType:false,
+        processData:false,
+        success:function(){
+          
+
+        }
+      })
+    })
+  })
+</script>
