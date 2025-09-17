@@ -157,18 +157,28 @@ session_start();
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>001</td>
-                          <td>T-shirt</td>
-                          <td>$12.5</td>
-                          <td>New popular T-shirt</td>
-                          <td><img width="70px" height="70px" class="rounded-circle" src="https://i.pinimg.com/1200x/05/a6/39/05a639f55ec0188d3b4f83ceb52c98ec.jpg" alt=""></td>
-                          <td>
-                            <button class="btn btn-danger" type="button">Delete</button>
-                            <button class="btn btn-warning" type="button">Edit</button>
-                          </td>
-                        </tr>
+                      <tbody id="tbody">
+                        <?php
+                        include '../connection.php';
+                        $select = "SELECT * FROM tbl_product";
+                        $res = $conn->query($select);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                          echo '
+                              <tr>
+                                <td>' . $row['product_id'] . '</td>
+                                <td>' . $row['title'] . '</td>
+                                <td>' . $row['price'] . '</td>
+                                <td>' . $row['description'] . '</td>
+                                <td><img width="70px" height="70px" class="rounded-circle" src="upload/' . $row['product_image'] . '" alt=""></td>
+                                <td>
+                                  <button class="btn btn-danger" type="button">Delete</button>
+                                  <button class="btn btn-warning" type="button">Edit</button>
+                                </td>
+                              </tr>
+                              ';
+                        }
+                        ?>
+
                       </tbody>
                       <!-- Button trigger modal -->
 
@@ -210,7 +220,7 @@ session_start();
                                     <div class="col-12">
                                       <label for="image" class="form-label">Product Image</label> <br>
                                       <img width="70px" id="image" height="70px" class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s" alt="">
-                                      <input type="file" name="file" id="file" class="form-control"  required>
+                                      <input type="file" name="file" id="file" class="form-control" required>
                                     </div>
 
                                   </div>
@@ -246,41 +256,58 @@ session_start();
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
+
 </html>
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
     $('#file').hide();
-    $('#image').click(function(){
+    $('#image').click(function() {
       $('#file').click();
     })
-    $('#file').change(function(){
-      const file=this.files[0];
-      if(file){
-        const img=URL.createObjectURL(file);
-        $('#image').attr('src',img);
+    $('#file').change(function() {
+      const file = this.files[0];
+      if (file) {
+        const img = URL.createObjectURL(file);
+        $('#image').attr('src', img);
       }
     })
-    $('#save').click(function(){
-     
-      let file=$('#file')[0].files[0];
-      let title=$('#title').val();
-      let price=$('#price').val();
-      let des=$('#description').val();
+    $('#save').click(function() {
 
-      const formdata=new FormData();
-      formdata.append('file',file);
-      formdata.append('title',title);
-      formdata.append('price',price);
-      formdata.append('description',des);
+      let file = $('#file')[0].files[0];
+      let title = $('#title').val();
+      let price = $('#price').val();
+      let des = $('#description').val();
+
+      const formdata = new FormData();
+      formdata.append('file', file);
+      formdata.append('title', title);
+      formdata.append('price', price);
+      formdata.append('description', des);
       $.ajax({
-        url:'insert.php',
-        method:'POST',
-        data:formdata,
-        contentType:false,
-        processData:false,
-        success:function(){
-          
+        url: 'insert.php',
+        method: 'POST',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: function(response) {
 
+          const image = $('#image').attr('src');
+          $('#tbody').append(`
+               alert(123);
+                <tr>
+                    <td>${response}</td>
+                    <td>${title}</td>
+                    <td>${price}</td>
+                    <td>${des}</td>
+                    <td><img width="70px" height="70px" class="rounded-circle" src="${image}" alt=""></td>
+                    <td>
+                      <button class="btn btn-danger" type="button">Delete</button>
+                      <button class="btn btn-warning" type="button">Edit</button>
+                    </td>
+                  </tr>
+            `)
+            $('#form')[0].reset();
+            $('#image').attr('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s')
         }
       })
     })

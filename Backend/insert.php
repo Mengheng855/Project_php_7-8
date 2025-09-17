@@ -11,7 +11,10 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
     $insert = "INSERT INTO tbl_product (title,price,description,product_image)
    VALUES ('$title','$price','$des','$file')";
     $ex = mysqli_query($conn, $insert);
-    if ($ex) {
-        echo 123;
+    $select="SELECT product_id FROM tbl_product ORDER BY product_id DESC LIMIT 1";
+    $rs=mysqli_query($conn,$select);
+    $select_id=mysqli_fetch_assoc($rs)['product_id'];
+    if($select_id){
+        echo $select_id;
     }
 }
