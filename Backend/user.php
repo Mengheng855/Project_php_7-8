@@ -134,121 +134,109 @@ session_start();
 
                   <div class="table-responsive mt-4">
                     <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
+                      <button type="button" id="add" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        +Add Product
+                      </button>
                       <thead>
                         <tr>
-                          <th scope="col" class="px-0 text-muted">
-                            Assigned
+                          <th>
+                            ID
                           </th>
-                          <th scope="col" class="px-0 text-muted">Name</th>
-                          <th scope="col" class="px-0 text-muted">
-                            Priority
+                          <th>Title</th>
+                          <th>
+                            Price
                           </th>
-                          <th scope="col" class="px-0 text-muted text-end">
-                            Budget
+                          <th>
+                            Description
+                          </th>
+                          <th>
+                            Image
+                          </th>
+                          <th>
+                            Action
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-3.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Sunil Joshi</h6>
-                                <span class="text-muted">Web Designer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Elite Admin</td>
-                          <td class="px-0">
-                            <span class="badge bg-info">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $3.9K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-5.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">
-                                  Andrew McDownland
-                                </h6>
-                                <span class="text-muted">Project Manager</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Real Homes WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge text-bg-primary">Medium</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $24.5K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-6.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">
-                                  Christopher Jamil
-                                </h6>
-                                <span class="text-muted">SEO Manager</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">MedicalPro WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge bg-warning">Hight</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $12.8K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-7.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Nirav Joshi</h6>
-                                <span class="text-muted">Frontend Engineer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Hosting Press HTML</td>
-                          <td class="px-0">
-                            <span class="badge bg-danger">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $2.4K
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="px-0">
-                            <div class="d-flex align-items-center">
-                              <img src="../assets/images/profile/user-8.jpg" class="rounded-circle" width="40"
-                                alt="flexy" />
-                              <div class="ms-3">
-                                <h6 class="mb-0 fw-bolder">Micheal Doe</h6>
-                                <span class="text-muted">Content Writer</span>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-0">Helping Hands WP Theme</td>
-                          <td class="px-0">
-                            <span class="badge bg-success">Low</span>
-                          </td>
-                          <td class="px-0 text-dark fw-medium text-end">
-                            $9.3K
-                          </td>
-                        </tr>
+                      <tbody id="tbody">
+                        <?php
+                        include '../connection.php';
+                        $select = "SELECT * FROM tbl_product";
+                        $res = $conn->query($select);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                          echo '
+                              <tr>
+                                <td>' . $row['product_id'] . '</td>
+                                <td>' . $row['title'] . '</td>
+                                <td>' . $row['price'] . '</td>
+                                <td>' . $row['description'] . '</td>
+                                <td><img width="70px" height="70px" class="rounded-circle" src="upload/' . $row['product_image'] . '" alt=""></td>
+                                <td>
+                                  <button class="btn btn-danger" name="delete" id="delete" type="button">Delete</button>
+                                  <button class="btn btn-warning" name="edit"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="edit" type="button">Edit</button>
+                                </td>
+                              </tr>
+                              ';
+                        }
+                        ?>
+
                       </tbody>
+                      <!-- Button trigger modal -->
+
+
+                      <!-- Modal -->
+                      <<!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                              <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+                              <form action="" id="form" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                  <div class="row g-3">
+
+                                    <!-- Title -->
+                                    <div class="col-md-6">
+                                      <label for="title" class="form-label">Product Title</label>
+                                      <input type="text" name="title" id="title" class="form-control" placeholder="Enter product title" required>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="col-md-6">
+                                      <label for="price" class="form-label">Price ($)</label>
+                                      <input type="number" name="price" id="price" class="form-control" step="0.01" placeholder="Enter price" required>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="col-12">
+                                      <label for="description" class="form-label">Description</label>
+                                      <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter product description" required></textarea>
+                                    </div>
+
+                                    <!-- Image -->
+                                    <div class="col-12">
+                                      <label for="image" class="form-label">Product Image</label> <br>
+                                      <img width="70px" id="image" height="70px" class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s" alt="">
+                                      <input type="file" name="file" id="file" class="form-control" required>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" id="save" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                                  <button type="button" id="update" class="btn btn-warning" data-id="" data-bs-dismiss="modal">Edit</button>
+                                </div>
+                              </form>
+
+                            </div>
+                          </div>
+                        </div>
+
                     </table>
                   </div>
                 </div>

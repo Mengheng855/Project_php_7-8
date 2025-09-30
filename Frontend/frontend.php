@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,8 +273,17 @@
             </div>
         </div>
         <div class="d-flex gap-2 mx-2">
-            <a href="../Auth/login.php"><button class="btn btn-primary" >Login</button></a>
-            <a href="../Auth/register.php"><button class="btn btn-primary" >Register</button></a>
+
+            <?php
+            
+            if($_SESSION['login']==1){
+                echo '<img src="../Auth/image/'.$_SESSION['profile'].'" alt="" width="35" height="35" class="rounded-circle">';
+                echo '<a href="../Auth/logout.php" class="btn btn-outline-primary">Logout</a>';
+            } else {
+                echo '<a href="../Auth/login.php" class="btn btn-primary">Login</a>';
+                echo '<a href="../Auth/register.php" class="btn btn-primary">Register</a>';
+            }
+            ?>
         </div>
     </nav>
 

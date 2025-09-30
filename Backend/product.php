@@ -23,12 +23,7 @@ session_start();
         <a class="d-flex justify-content-center" href="#">
           <img src="../assets/images/logos/logo-wrappixel.svg" alt="" width="150">
         </a>
-
-
       </div>
-
-
-
     </div>
     <!-- Sidebar Start -->
     <aside class="left-sidebar">
@@ -134,7 +129,7 @@ session_start();
 
                   <div class="table-responsive mt-4">
                     <table class="table mb-0 text-nowrap varient-table align-middle fs-3">
-                      <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <button type="button" id="add" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         +Add Product
                       </button>
                       <thead>
@@ -171,8 +166,8 @@ session_start();
                                 <td>' . $row['description'] . '</td>
                                 <td><img width="70px" height="70px" class="rounded-circle" src="upload/' . $row['product_image'] . '" alt=""></td>
                                 <td>
-                                  <button class="btn btn-danger" type="button">Delete</button>
-                                  <button class="btn btn-warning" type="button">Edit</button>
+                                  <button class="btn btn-danger" name="delete" id="delete" type="button">Delete</button>
+                                  <button class="btn btn-warning" name="edit"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="edit" type="button">Edit</button>
                                 </td>
                               </tr>
                               ';
@@ -229,6 +224,7 @@ session_start();
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   <button type="button" id="save" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                                  <button type="button" id="update" class="btn btn-warning" data-id="" data-bs-dismiss="modal">Edit</button>
                                 </div>
                               </form>
 
@@ -246,7 +242,10 @@ session_start();
       </div>
     </div>
   </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  </body>
+
+</html>
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
   <script src="../assets/js/app.min.js"></script>
@@ -255,9 +254,7 @@ session_start();
   <script src="../assets/js/dashboard.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-</body>
 
-</html>
 <script>
   $(document).ready(function() {
     $('#file').hide();
@@ -270,6 +267,13 @@ session_start();
         const img = URL.createObjectURL(file);
         $('#image').attr('src', img);
       }
+    })
+    $('#add').click(function(){
+      $('#update').hide();
+      $('#save').show();
+      $('#exampleModalLabel').text('Add New Product');
+      $('#form')[0].reset();
+      $('#image').attr('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s');
     })
     $('#save').click(function() {
 
@@ -290,10 +294,8 @@ session_start();
         contentType: false,
         processData: false,
         success: function(response) {
-
           const image = $('#image').attr('src');
           $('#tbody').append(`
-               alert(123);
                 <tr>
                     <td>${response}</td>
                     <td>${title}</td>
@@ -301,14 +303,82 @@ session_start();
                     <td>${des}</td>
                     <td><img width="70px" height="70px" class="rounded-circle" src="${image}" alt=""></td>
                     <td>
-                      <button class="btn btn-danger" type="button">Delete</button>
-                      <button class="btn btn-warning" type="button">Edit</button>
+                      <button class="btn btn-danger" id="delete" name="delete" type="button">Delete</button>
+                      <button class="btn btn-warning" id="edit" name="edit" type="button">Edit</button>
                     </td>
                   </tr>
             `)
             $('#form')[0].reset();
             $('#image').attr('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bNOpQOznqtb7Ao-2LgUUQayQFpGNvr75Mw&s')
         }
+      })
+    })
+    $(document).on('click','#delete',function(){
+      let row=$(this).closest('tr');
+      let id=row.find('td:first').text().trim();
+      $.ajax({
+        url:'delete.php',
+        method:'post',
+        data:{id},
+        success:function(){
+          row.remove();
+        }
+      })
+    })
+    $(document).on('click','#edit',function(){
+      $('#update').show();
+      $('#save').hide();
+      $('#exampleModalLabel').text('Update Product');
+
+      const row=$(this).closest('tr');
+      const id=row.find('td:eq(0)').text().trim();
+      const title=row.find('td:eq(1)').text().trim();  
+      const price=row.find('td:eq(2)').text().trim();
+      const des=row.find('td:eq(3)').text().trim();
+      const img=row.find('td:eq(4) img').attr('src');
+
+      $('#title').val(title);
+      $('#price').val(price);
+      $('#description').val(des);
+      $('#image').attr('src',img);
+      $('#update').attr('data-id',id);
+
+    })
+    $(document).on('click','#update',function(){
+      
+      let id=$(this).attr('data-id');
+      let file = $('#file')[0].files[0];
+      let title = $('#title').val();
+      let price = $('#price').val();
+      let des = $('#description').val();
+      
+
+
+      const formdata = new FormData();
+      formdata.append('id', id);
+      formdata.append('file', file);
+      formdata.append('title', title);
+      formdata.append('price', price);
+      formdata.append('description', des);
+      $.ajax({
+        
+        url:'edit.php',
+        type:'POST',
+        data:formdata,
+        contentType:false,
+        processData:false,
+        success:function(res){
+          $('tbody tr').each(function(){
+            if($(this).find('td:eq(0)').text().trim()==id){
+              const image=$('#image').attr('src');
+              $(this).find('td:eq(1)').text(title);
+              $(this).find('td:eq(2)').text(price);
+              $(this).find('td:eq(3)').text(des);
+              $(this).find('td:eq(4) img').attr('src',image);
+            }
+          })
+        },
+        
       })
     })
   })
