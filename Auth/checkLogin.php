@@ -13,8 +13,7 @@ if(isset($_POST['login'])){
         $_SESSION['is_admin']=$row['is_admin'];
         $_SESSION['profile']=$row['profile'];
         if($_SESSION['is_admin']==1){
-            
-             alert('Login successfully!','Welcome Admin','success','../Backend/index.php');
+            alert('Login successfully!','Welcome Admin','success','../Backend/index.php');
         }elseif($_SESSION['is_admin']==0){
             alert('Login successfully!','Welcome user','success','../Frontend/frontend.php');
         }else{

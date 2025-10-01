@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@ session_start();
         /* Header Styles */
         .navbar {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
         }
 
@@ -111,14 +112,14 @@ session_start();
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 2rem;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .product-image {
@@ -223,21 +224,22 @@ session_start();
             .carousel-content h2 {
                 font-size: 2rem;
             }
-            
+
             .carousel-content p {
                 font-size: 1rem;
             }
-            
+
             .hero-carousel {
                 height: 400px;
             }
-            
+
             .carousel-item {
                 height: 400px;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -245,11 +247,10 @@ session_start();
             <a class="navbar-brand" href="#">
                 <i class="fas fa-shopping-bag me-2"></i>ShopHub
             </a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -273,11 +274,9 @@ session_start();
             </div>
         </div>
         <div class="d-flex gap-2 mx-2">
-
             <?php
-            
-            if($_SESSION['login']==1){
-                echo '<img src="../Auth/image/'.$_SESSION['profile'].'" alt="" width="35" height="35" class="rounded-circle">';
+            if (isset($_SESSION['login']) && $_SESSION['login']) {
+                echo '<img src="../Auth/image/' . $_SESSION['profile'] . '" alt="" width="35" height="35" class="rounded-circle">';
                 echo '<a href="../Auth/logout.php" class="btn btn-outline-primary">Logout</a>';
             } else {
                 echo '<a href="../Auth/login.php" class="btn btn-primary">Login</a>';
@@ -295,7 +294,7 @@ session_start();
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
             </div>
-            
+
             <div class="carousel-inner">
                 <!-- Replaced first slide with summer sale promotional image -->
                 <div class="carousel-item active">
@@ -310,7 +309,7 @@ session_start();
                     <img src="https://i.pinimg.com/1200x/22/0d/2c/220d2c35673601972c13e24cb818ace2.jpg" class="d-block w-100" alt="Online Shopping Experience" style="height: 500px; object-fit: cover;">
                 </div>
             </div>
-            
+
             <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
@@ -321,146 +320,39 @@ session_start();
     </section>
 
     <!-- Products Section -->
+
     <section id="products" class="products-section">
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
-            
+
             <div class="row">
                 <!-- Product 1 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-tshirt"></i>
+                <?php
+                include '../connection.php';
+                $select = "SELECT * FROM tbl_product";
+                $rs = mysqli_query($conn, $select);
+                while ($row = mysqli_fetch_assoc($rs)) {
+                    echo '
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="../Backend/upload/'.$row['product_image'].'" width="270px" alt="">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-title">'.$row['title'].'</h4>
+                                    <p class="product-description">'.$row['description'].'</p>
+                                    <div class="product-price">$'.$row['price'].'</div>
+                                    <button class="btn btn-cart">
+                                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Premium T-Shirt</h4>
-                            <p class="product-description">Comfortable cotton blend t-shirt perfect for everyday wear</p>
-                            <div class="product-price">$29.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                        ';
+                }
+                ?>
 
-                <!-- Product 2 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-running"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Running Shoes</h4>
-                            <p class="product-description">Lightweight and comfortable shoes for your daily runs</p>
-                            <div class="product-price">$89.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Product 3 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-backpack"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Travel Backpack</h4>
-                            <p class="product-description">Durable backpack with multiple compartments for travel</p>
-                            <div class="product-price">$59.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-watch"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Smart Watch</h4>
-                            <p class="product-description">Feature-rich smartwatch with health monitoring</p>
-                            <div class="product-price">$199.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-headphones"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Wireless Headphones</h4>
-                            <p class="product-description">High-quality wireless headphones with noise cancellation</p>
-                            <div class="product-price">$149.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Laptop Stand</h4>
-                            <p class="product-description">Ergonomic laptop stand for better posture and comfort</p>
-                            <div class="product-price">$39.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 7 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-coffee"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Coffee Mug</h4>
-                            <p class="product-description">Insulated coffee mug that keeps drinks hot for hours</p>
-                            <div class="product-price">$24.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 8 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="product-title">Notebook Set</h4>
-                            <p class="product-description">Premium notebook set for writing and sketching</p>
-                            <div class="product-price">$19.99</div>
-                            <button class="btn btn-cart">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -512,7 +404,7 @@ session_start();
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
@@ -522,7 +414,7 @@ session_start();
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h5>Categories</h5>
                     <ul class="list-unstyled">
@@ -532,7 +424,7 @@ session_start();
                         <li><a href="#">Home & Garden</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h5>Support</h5>
                     <ul class="list-unstyled">
@@ -542,7 +434,7 @@ session_start();
                         <li><a href="#">Size Guide</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h5>Account</h5>
                     <ul class="list-unstyled">
@@ -561,11 +453,11 @@ session_start();
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JavaScript -->
     <script>
         console.log("[v0] Initializing navbar functionality");
-        
+
         // Ensure Bootstrap navbar toggle works properly
         let cart = [];
         let cartTotal = 0;
@@ -573,9 +465,12 @@ session_start();
         document.addEventListener('DOMContentLoaded', function() {
             const navbarToggler = document.querySelector('.navbar-toggler');
             const navbarCollapse = document.querySelector('#navbarNav');
-            
-            console.log("[v0] Navbar elements found:", { toggler: !!navbarToggler, collapse: !!navbarCollapse });
-            
+
+            console.log("[v0] Navbar elements found:", {
+                toggler: !!navbarToggler,
+                collapse: !!navbarCollapse
+            });
+
             // Add click event listener to navbar toggler for debugging
             if (navbarToggler) {
                 navbarToggler.addEventListener('click', function() {
@@ -583,7 +478,7 @@ session_start();
                     console.log("[v0] Navbar collapse classes:", navbarCollapse.className);
                 });
             }
-            
+
             // Close navbar when clicking on nav links (mobile)
             document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
                 link.addEventListener('click', function() {
@@ -621,7 +516,7 @@ session_start();
                 const productTitle = productCard.querySelector('.product-title').textContent;
                 const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', ''));
                 const productIcon = productCard.querySelector('.product-image i').className;
-                
+
                 // Add item to cart
                 const cartItem = {
                     id: Date.now() + index,
@@ -630,7 +525,7 @@ session_start();
                     icon: productIcon,
                     quantity: 1
                 };
-                
+
                 // Check if item already exists in cart
                 const existingItem = cart.find(item => item.title === productTitle);
                 if (existingItem) {
@@ -638,14 +533,14 @@ session_start();
                 } else {
                     cart.push(cartItem);
                 }
-                
+
                 cartTotal += productPrice;
                 updateCartCounter();
-                
+
                 // Visual feedback
                 this.innerHTML = '<i class="fas fa-check me-2"></i>Added!';
                 this.style.background = '#059669';
-                
+
                 setTimeout(() => {
                     this.innerHTML = '<i class="fas fa-cart-plus me-2"></i>Add to Cart';
                     this.style.background = '';
@@ -663,7 +558,7 @@ session_start();
         function updateCartDisplay() {
             const cartItemsContainer = document.getElementById('cartItems');
             const cartTotalElement = document.getElementById('cartTotal');
-            
+
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = `
                     <div class="text-center text-muted py-4">
@@ -674,7 +569,7 @@ session_start();
                 cartTotalElement.textContent = '0.00';
                 return;
             }
-            
+
             cartItemsContainer.innerHTML = cart.map(item => `
                 <div class="cart-item d-flex align-items-center justify-content-between p-3 border-bottom">
                     <div class="d-flex align-items-center">
@@ -696,7 +591,7 @@ session_start();
                     </div>
                 </div>
             `).join('');
-            
+
             cartTotalElement.textContent = cartTotal.toFixed(2);
         }
 
@@ -705,12 +600,12 @@ session_start();
             if (item) {
                 const oldQuantity = item.quantity;
                 item.quantity += change;
-                
+
                 if (item.quantity <= 0) {
                     removeFromCart(itemId);
                     return;
                 }
-                
+
                 cartTotal += (item.price * change);
                 updateCartCounter();
                 updateCartDisplay();
@@ -733,7 +628,7 @@ session_start();
             if (anchor.getAttribute('href') === '#cart') {
                 return;
             }
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -752,4 +647,5 @@ session_start();
         });
     </script>
 </body>
+
 </html>
