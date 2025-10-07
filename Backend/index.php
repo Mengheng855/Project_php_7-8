@@ -1,10 +1,22 @@
 <?php
-  session_start();
-  if(!isset($_SESSION['login']) || $_SESSION['login']!=1){
-    header('location: ../Frontend/frontend.php');
-   
-  }
+session_start();
+
+if (
+  !isset($_SESSION['login']) ||
+  $_SESSION['login'] != 1 ||
+  !isset($_SESSION['is_admin']) ||
+  $_SESSION['is_admin'] != 1
+) {
+
+  header('location: ../Frontend/frontend.php');
+  exit();
+}
+
+
+
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
@@ -112,12 +124,12 @@
                 <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <?php
-                    echo '<img src="../Auth/image/'.$_SESSION['profile'].'" alt="" width="35" height="35" class="rounded-circle">';
+                  echo '<img src="../Auth/image/' . $_SESSION['profile'] . '" alt="" width="35" height="35" class="rounded-circle">';
                   ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    
+
                     <a href="../Auth/logout.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
@@ -127,7 +139,7 @@
         </nav>
       </header>
       <!--  Header End -->
-      
+
     </div>
   </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
