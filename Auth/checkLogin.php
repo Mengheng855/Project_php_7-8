@@ -26,11 +26,9 @@ if (isset($_POST['login'])) {
                 alert('Login successfully!', 'Welcome user', 'success', '../Frontend/frontend.php');
             }
         } else {
-   
             alert('Wrong password or email', 'Try again!', 'error', 'login.php');
         }
     } else {
-     
         alert('Wrong password or email', 'Try again!', 'error', 'login.php');
     }
 }
